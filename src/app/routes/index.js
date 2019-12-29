@@ -1,10 +1,15 @@
-import { Home, Login, ProductDetails, ProductList } from "../views/pages";
+import { Home, Bulma, Login, ProductDetails, ProductList } from "../views/pages";
 import { withAuthentication, lazyLoad } from "../views/enhancers";
 
 const routes = [
     {
         path: "/",
         component: Home,
+        exact: true,
+    },
+    {
+        path: "/bulma",
+        component: Bulma,
         exact: true,
     },
     {
