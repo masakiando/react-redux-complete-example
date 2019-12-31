@@ -7,6 +7,14 @@
     "rules": {
         "prefer-promise-reject-errors": 1,
         "react/forbid-prop-types": 1,
-        "react/no-typos": 0
+        "react/no-typos": 0,
+        "jsx-a11y/label-has-for": [ 2, {
+            "components": [ "Label" ],
+            "required": {
+                "some": [ "nesting", "id" ]
+            },
+            "allowChildren": false,
+        }]
+
     }
 }
