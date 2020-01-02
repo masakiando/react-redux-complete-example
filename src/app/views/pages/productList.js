@@ -6,43 +6,45 @@ import { productOperations } from "../../state/ducks/product";
 import { productShape } from "../propTypes";
 
 class ProductList extends Component {
-    componentDidMount( ) {
-        if ( this.props.products.length === 0 ) {
-            this.props.fetchList( );
-        }
+  componentDidMount() {
+    if (this.props.products.length === 0) {
+      this.props.fetchList();
     }
+  }
 
-    render( ) {
-        const productList = this.props.products
-            .map( p => <Link key={ p.id } to={ `/products/${ p.permalink }` }>{ p.name }</Link> );
+  render() {
+    const productList = this.props.products.map(p => (
+      <Link key={p.id} to={`/products/${p.permalink}`}>
+        {p.name}
+      </Link>
+    ));
 
-        return (
-            <div>
-                { productList }
-            </div>
-        );
-    }
+    return <div>{productList}</div>;
+  }
 }
 
 const { arrayOf, func } = PropTypes;
 
 ProductList.propTypes = {
-    products: arrayOf( productShape ),
-    fetchList: func.isRequired,
+  products: arrayOf(productShape),
+  fetchList: func.isRequired
 };
 
 ProductList.defaultProps = {
-    products: [ ],
+  products: []
 };
 
 ProductList.prefetch = productOperations.fetchList;
 
-const mapStateToProps = ( state ) => ( {
-    products: state.product.list,
-} );
+const mapStateToProps = state => ({
+  products: state.product.list
+});
 
 const mapDispatchToProps = {
-    fetchList: productOperations.fetchList,
+  fetchList: productOperations.fetchList
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( ProductList );
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductList);
