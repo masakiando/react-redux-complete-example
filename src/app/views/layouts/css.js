@@ -4,7 +4,6 @@ import { injectGlobal } from "styled-components";
 export default () => {
     injectGlobal` 
         body {
-            background-color: green;
             color: navy-blue;
             div {
                 padding: 4px;

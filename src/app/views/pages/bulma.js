@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 export default () => (
     <section className="hero is-fullheight">
@@ -84,12 +83,7 @@ export default () => (
                     <p className="subtitle has-text-white is-7">Mile Range</p>
                 </div>
                 <div id="e" className="center-column">
-                    <Link
-                        className="button is-danger is-inverted is-rounded is-outlined has-text-weight-bold"
-                        style={ { width: "100%", border: "0.15em solid white" } }
-                    >
-                        Reserve Now
-                    </Link>
+                    <p className="subtitle has-text-white is-7">Mile Range</p>
                 </div>
             </div>
         </main>

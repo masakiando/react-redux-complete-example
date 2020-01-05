@@ -1,6 +1,6 @@
 import { fetch } from "../utils";
 
-const baseUrl = typeof document === "undefined" ? "http://localhost:7777/api" : "/api";
+const baseUrl = typeof document === "undefined" ? "http://localhost:7777/api/v1" : "/api/v1";
 
 const apiService = ( ) => ( next ) => ( action ) => {
     const result = next( action );

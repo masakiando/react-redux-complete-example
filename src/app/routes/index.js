@@ -1,4 +1,11 @@
-import { Home, Bulma, Login, ProductDetails, ProductList } from "../views/pages";
+import {
+    Home,
+    OrderList,
+    Bulma,
+    Login,
+    ProductDetails,
+    ProductList,
+} from "../views/pages";
 import { withAuthentication, lazyLoad } from "../views/enhancers";
 
 const routes = [
@@ -10,6 +17,11 @@ const routes = [
     {
         path: "/bulma",
         component: Bulma,
+        exact: true,
+    },
+    {
+        path: "/orders",
+        component: OrderList,
         exact: true,
     },
     {

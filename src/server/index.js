@@ -11,7 +11,7 @@ import Helmet from "react-helmet";
 import { Provider as ReduxProvider } from "react-redux";
 
 import App from "../app/views/layouts/app";
-import apiRoutes from "./apiRoutes";
+import apiRoutes from "./Routes/apiRoutes";
 import configureStore from "../app/state/store";
 import routes from "../app/routes";
 
@@ -19,9 +19,10 @@ const app = express( );
 
 const DEFAULT_PORT = 7777;
 app.use( bodyParser.json( ) );
+app.use( bodyParser.urlencoded( { extended: false } ) );
 app.use( cookieParser( ) );
 app.use( express.static( path.resolve( __dirname, "../../dist" ) ) );
-app.use( "/api", apiRoutes );
+app.use( "/api/v1", apiRoutes );
 
 app.use( ( req, res ) => {
     const reduxStore = configureStore( );
