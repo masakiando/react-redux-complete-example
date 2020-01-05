@@ -11,7 +11,7 @@ import Helmet from "react-helmet";
 import { Provider as ReduxProvider } from "react-redux";
 
 import App from "../app/views/layouts/app";
-import apiRoutes from "./apiRoutes";
+import apiRoutes from "./Routes/apiRoutes";
 import configureStore from "../app/state/store";
 import routes from "../app/routes";
 
@@ -19,9 +19,10 @@ const app = express( );
 
 const DEFAULT_PORT = 7777;
 app.use( bodyParser.json( ) );
+app.use( bodyParser.urlencoded( { extended: false } ) );
 app.use( cookieParser( ) );
 app.use( express.static( path.resolve( __dirname, "../../dist" ) ) );
-app.use( "/api", apiRoutes );
+app.use( "/api/v1", apiRoutes );
 
 app.use( ( req, res ) => {
     const reduxStore = configureStore( );
@@ -71,6 +72,8 @@ function templateHtml( head, reactDom, reduxState, styles ) {
                 ${ head.meta.toString( ) }
                 ${ head.link.toString( ) }
                 ${ styles }
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+                <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
                 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"/>
                 <meta charset="UTF-8">
             </head>
