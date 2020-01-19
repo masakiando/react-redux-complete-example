@@ -1,7 +1,8 @@
+/* eslint-disable global-require */
 const path = require( "path" );
 const webpack = require( "webpack" );
 const ExtractTextPlugin = require( "extract-text-webpack-plugin" );
-const BundleAnalyzerPlugin = require( "webpack-bundle-analyzer" ).BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require( "webpack-bundle-analyzer" );
 
 const productionEnv = process.env.NODE_ENV === "production";
 
@@ -15,8 +16,10 @@ const plugins = [
         filename: "[name].bundle.css",
         allChunks: true,
     } ),
-    new webpack.DefinePlugin( { "process.env.NODE_ENV": JSON.stringify( process.env.NODE_ENV ) } ),
-    new BundleAnalyzerPlugin( ),
+    new webpack.DefinePlugin( {
+        "process.env.NODE_ENV": JSON.stringify( process.env.NODE_ENV ),
+    } ),
+    new BundleAnalyzerPlugin(),
 ];
 
 if ( productionEnv ) {
@@ -47,10 +50,7 @@ module.exports = {
             // react: "preact-compat",
             // "react-dom": "preact-compat",
         },
-        modules: [
-            path.resolve( "./src" ),
-            "node_modules",
-        ],
+        modules: [ path.resolve( "./src" ), "node_modules" ],
     },
 
     module: {

@@ -9,6 +9,7 @@ const swaggerUi = require( "swagger-ui-express" );
 
 // App Modules
 const User = require( "../Models/User" );
+const Order = require( "../Models/Order" );
 
 /**
  * @swagger
@@ -71,6 +72,18 @@ router.post( "/users", ( req, res ) => {
  *   name: Products
  *   description: Products management
  */
+
+/**
+ * @swagger
+ * path:
+ *  /products/:
+ *    get:
+ *      summary: Get all Products
+ *      tags: [Products]
+ *      responses:
+ *        "200":
+ *          description: An array of Products
+ */
 router.get( "/products", ( req, res ) => {
     setTimeout(
         () => res.json( { products: data.products.map( productOverview ) } ),
@@ -100,17 +113,47 @@ router.get( "/products/:permalink", ( req, res ) => {
  *      responses:
  *        "200":
  *          description: An array of orders
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/User'
  */
 router.get( "/orders", ( req, res ) => {
     const { projects, orders } = data;
     const result = join( projects, orders, "id", "project_id", orderOverview );
 
     setTimeout( () => res.json( { orders: result } ), 500 );
-    // setTimeout( () => res.json( { orders: data.orders.map( orderOverview ) } ), 500 );
+    // setTimeout( () => res.json( { orders: result.map( orderOverview ) } ), 500 );
+} );
+
+/**
+ * @swagger
+ * path:
+ *  /orders/:
+ *    post:
+ *      summary: Create a new order
+ *      tags: [Orders]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Order'
+ *      responses:
+ *        "200":
+ *          description: success true
+ *          content:
+ */
+router.post( "/orders", ( req, res ) => {
+    setTimeout( () => {
+        if ( req.body.title && req.body.title !== null ) {
+            const { project_id, title, discrption } = req.body;
+            const order = new Order( project_id, title, discrption );
+            const newOrder = Object.assign( { }, order, { id: data.orders.length + 1 } );
+            data.orders.push( newOrder );
+            return res.status( 200 ).json( newOrder );
+        }
+
+        return res
+            .status( 400 )
+            .json( { success: false, error: "Invalid credentials" } );
+    }, 500 );
 } );
 
 router.post( "/login", ( req, res ) => {
@@ -141,21 +184,10 @@ function orderOverview( order, project ) {
         id: order.id,
         title: order.title,
         status: order.status,
-        tat: order.tat,
+        tat: 1, // TODO 計算必要 現在時刻引数にする - startDate
         project_name: project !== undefined ? project.project_name : null,
     };
 }
-
-// function orderOverview( order ) {
-//     return {
-//         id: order.id,
-//         project: order.project,
-//         title: order.title,
-//         status: order.status,
-//         tat: order.tat,
-//         startDate: order.startDate,
-//     };
-// }
 
 // Swagger set up
 const options = {
@@ -184,6 +216,7 @@ const options = {
     },
     apis: [
         path.resolve( __dirname, "../Models/User.js" ),
+        path.resolve( __dirname, "../Models/Order.js" ),
         path.resolve( __dirname, "./apiRoutes.js" ),
     ],
 };
