@@ -10,7 +10,7 @@ export default () => {
             }
 
             a {
-                padding: 0 10px;
+                padding: 0px;
                 text-decoration: none;
             }
 

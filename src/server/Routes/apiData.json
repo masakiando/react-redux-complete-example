@@ -52,7 +52,6 @@
             "project_id": 1, 
             "title": "Bananaを作る",
             "status": "Receive",
-            "tat": 2.4,
             "startDate": "2019/12/15 10:36"
         },
         {
@@ -60,7 +59,6 @@
             "project_id": 1, 
             "title": "Bananaを作る",
             "status": "Receive",
-            "tat": 2.4,
             "startDate": "2019/12/15 10:36"
         },
         {
@@ -68,7 +66,6 @@
             "project_id": 1, 
             "title": "Bananaを作る",
             "status": "Receive",
-            "tat": 2.4,
             "startDate": "2019/12/15 10:36"
         },
         {
@@ -76,7 +73,6 @@
             "project_id": 1, 
             "title": "Bananaを作る",
             "status": "Receive",
-            "tat": 2.4,
             "startDate": "2019/12/15 10:36"
         },
         {
@@ -84,7 +80,6 @@
             "project_id": 2, 
             "title": "Bananaを作る",
             "status": "Receive",
-            "tat": 2.4,
             "startDate": "2019/12/15 10:36"
         }
     ],

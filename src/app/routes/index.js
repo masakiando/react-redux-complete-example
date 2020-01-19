@@ -1,10 +1,11 @@
 import {
     Home,
-    OrderList,
     Bulma,
     Login,
     ProductDetails,
     ProductList,
+    OrderList,
+    orderForm,
 } from "../views/pages";
 import { withAuthentication, lazyLoad } from "../views/enhancers";
 
@@ -22,6 +23,11 @@ const routes = [
     {
         path: "/orders",
         component: OrderList,
+        exact: true,
+    },
+    {
+        path: "/orders/new",
+        component: orderForm,
         exact: true,
     },
     {
