@@ -143,8 +143,8 @@ router.get( "/orders", ( req, res ) => {
 router.post( "/orders", ( req, res ) => {
     setTimeout( () => {
         if ( req.body.title && req.body.title !== null ) {
-            const { project_id, title, discrption } = req.body;
-            const order = new Order( project_id, title, discrption );
+            const { projectId, title, discrption } = req.body;
+            const order = new Order( projectId, title, discrption );
             const newOrder = Object.assign( { }, order, { id: data.orders.length + 1 } );
             data.orders.push( newOrder );
             return res.status( 200 ).json( newOrder );
@@ -154,6 +154,31 @@ router.post( "/orders", ( req, res ) => {
             .status( 400 )
             .json( { success: false, error: "Invalid credentials" } );
     }, 500 );
+} );
+
+/**
+ * @swagger
+ * tags:
+ *   name: Projects
+ *   description: Projects management
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /projects/:
+ *    get:
+ *      summary: Get all Projects
+ *      tags: [Projects]
+ *      responses:
+ *        "200":
+ *          description: An array of Projects
+ */
+router.get( "/projects", ( req, res ) => {
+    setTimeout(
+        () => res.json( { projects: data.projects.map( projectsOverview ) } ),
+        500,
+    );
 } );
 
 router.post( "/login", ( req, res ) => {
@@ -186,6 +211,13 @@ function orderOverview( order, project ) {
         status: order.status,
         tat: 1, // TODO 計算必要 現在時刻引数にする - startDate
         project_name: project !== undefined ? project.project_name : null,
+    };
+}
+
+function projectsOverview( projects ) {
+    return {
+        id: projects.id,
+        project_name: projects.project_name,
     };
 }
 
